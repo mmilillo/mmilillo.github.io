@@ -28470,30 +28470,29 @@
 
 //////////////////////// fin segunda
 
+
 window.portal = {};
 window.portal.pageEventListeners = {
   onLoad: (path) => {
-    const e = React.createElement; 
-	class myButton extends React.Component { 
-	  constructor(props) { 
-		super(props); 
-		this.state = { isliked: false }; 
-	  } 
-	 
-	  render() { 
-		if (this.state.isliked) { 
-		  return 'Yes I Really Like This.'; 
-		} 
-	 
-		return e( 
-		  'button', 
-		  { onClick: () => this.setState({ isliked: true }) }, 
-		  'Like Button' 
-		); 
-	  } 
-	} 
-	const domContainer = document.querySelector('#some_random_id'); 
-	ReactDOM.render(e(myButton), domContainer);
+    if (path === '/certificados') {
+      // Change text content of first <p> element to something
+      // else. (DOM must be loaded when onLoad is called)
+      document.getElementsByTagName('h2')[0].textContent =
+          'Texto modificadodesde script';
+      // print a custom message to the console every second while user is on
+      // quickstart page.
+      const interval =
+          window.setInterval(() => console.log('Hello'), 1000);
+      return interval;
+    }
     return undefined;
   },
+  onUnload: (path, contextReturnedFromOnLoad) => {
+    if (contextReturnedFromOnLoad != null) {
+      // Stop printing custom message to console every second.
+      window.clearInterval(contextReturnedFromOnLoad)
+
+    }
+  },
 };
+
